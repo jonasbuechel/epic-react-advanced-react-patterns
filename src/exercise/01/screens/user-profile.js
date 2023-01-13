@@ -16,9 +16,11 @@ const UserSettings = () => {
     setFormState({...formState, [e.target.name]: e.target.value})
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
-    updateUser(userDispatch, user, formState)
+    updateUser(userDispatch, user, formState).catch(error => {
+      console.log(error)
+    })
   }
 
   return (
