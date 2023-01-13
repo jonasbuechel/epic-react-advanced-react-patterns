@@ -1,5 +1,6 @@
 import * as React from 'react'
 import {useAuth} from '../../../auth-context'
+import * as userClient from '../../../user-client'
 
 const UserContext = React.createContext()
 UserContext.displayName = 'UserContext'
@@ -65,8 +66,12 @@ function useUser() {
   return context
 }
 
-// 🐨 add a function here called `updateUser`
-// Then go down to the `handleSubmit` from `UserSettings` and put that logic in
-// this function. It should accept: dispatch, user, and updates
+function updateUser(dispatch, user, updates) {
+  dispatch({type: 'start update', updates})
+  userClient.updateUser(user, updates).then(
+    updatedUser => dispatch({type: 'finish update', updatedUser}),
+    error => dispatch({type: 'fail update', error}),
+  )
+}
 
-export {UserProvider, useUser}
+export {UserProvider, useUser, updateUser}

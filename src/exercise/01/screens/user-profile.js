@@ -1,9 +1,6 @@
-// src/screens/user-profile.js
-// import {UserProvider, useUser} from './context/user-context'
-import {useUser} from '../context/user-context'
+import {useUser, updateUser} from '../context/user-context'
 import * as React from 'react'
 import {dequal} from 'dequal'
-import * as userClient from '../../../user-client'
 
 const UserSettings = () => {
   const [{user, status, error}, userDispatch] = useUser()
@@ -21,12 +18,7 @@ const UserSettings = () => {
 
   function handleSubmit(event) {
     event.preventDefault()
-    // 🐨 move the following logic to the `updateUser` function you create above
-    userDispatch({type: 'start update', updates: formState})
-    userClient.updateUser(user, formState).then(
-      updatedUser => userDispatch({type: 'finish update', updatedUser}),
-      error => userDispatch({type: 'fail update', error}),
-    )
+    updateUser(userDispatch, user, formState)
   }
 
   return (
