@@ -9,7 +9,7 @@ function Toggle({children}) {
   const toggle = () => setOn(!on)
 
   return React.Children.map(children, child => {
-    React.cloneElement(child, {
+    return React.cloneElement(child, {
       on,
       toggle,
     })
