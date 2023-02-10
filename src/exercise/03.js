@@ -17,7 +17,16 @@ function Toggle({children}) {
   )
 }
 
-const useToggle = () => useContext(ToggleContext)
+const useToggle = () => {
+  const context = useContext(ToggleContext)
+
+  if (!context) {
+    throw new Error(
+      'Please ensure to wrap your components with <Toggle></Toggle> ',
+    )
+  }
+  return context
+}
 
 function ToggleOn({children}) {
   const {on} = useToggle()
@@ -33,6 +42,9 @@ function ToggleButton({...props}) {
   const {on, toggle} = useToggle()
   return <Switch on={on} onClick={toggle} {...props} />
 }
+
+// ERROR CASE: this will trigger the error message
+//const App = () => <ToggleButton />
 
 function App() {
   return (
