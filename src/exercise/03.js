@@ -5,6 +5,7 @@ import {Switch} from '../switch'
 import {createContext, useContext, useState} from 'react'
 
 const ToggleContext = createContext()
+ToggleContext.displayName = 'ToggleContext'
 
 function Toggle({children}) {
   const [on, setOn] = useState(false)
