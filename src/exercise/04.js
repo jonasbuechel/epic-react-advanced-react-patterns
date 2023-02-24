@@ -16,7 +16,7 @@ function useToggle() {
     return {...togglerProps, ...appliedProps}
   }
 
-  return {on, getTogglerProps}
+  return {on, toggle, getTogglerProps}
 }
 
 function App() {
