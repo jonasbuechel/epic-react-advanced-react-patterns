@@ -12,8 +12,12 @@ function useToggle() {
     onClick: toggle,
   }
 
-  const getTogglerProps = appliedProps => {
-    return {...togglerProps, ...appliedProps}
+  const getTogglerProps = ({onClick, ...appliedProps}) => {
+    const onClickHandler = () => {
+      toggle()
+      onClick?.()
+    }
+    return {...togglerProps, ...appliedProps, onClick: onClickHandler}
   }
 
   return {on, toggle, getTogglerProps}
